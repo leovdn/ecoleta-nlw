@@ -17,31 +17,33 @@
     {% include "partials/page-header.html" %}
 
     <main>
-      <h4>
-        <strong>2 pontos</strong> encontrados
-      </h4>
-      <div class="cards">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1564419320408-38e24e038739?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Colectoria">
-          <h1>Colectoria</h1>
-          <h3>Resíduos Eletrônicos</h3>
-          <p>
-            Praia Grande, SP <br>
-            Av. Brasil, Boqueirão <br>
-            nº 848
-          </p>
-        </div>
 
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1565204294092-1b0870bd37d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Papersider">
-          <h1>Papersider</h1>
-          <h3>Papéis e Papelão</h3>
-          <p>
-            Praia Grande, SP <br>
-            Rua Beco Diagonal, Boqueirão <br>
-            nº 9/34
-          </p>
-        </div>
+    {% if total > 0 %}
+
+      <h4>
+        <strong>{{total}} pontos</strong> encontrados
+      </h4>
+
+      <div class="cards">
+
+        {% for place in places %}
+          <div class="card">
+            <img src="{{ place.image }}" alt="{{ place.name }}">
+            <h1>{{ place.name }}</h1>
+            <h3>{{ place.items }}</h3>
+            <p>
+              {{ place.city }}, {{ place.state }}<br>
+              {{ place.address }}<br>
+              {{ place.address2 }}
+            </p>
+          </div>
+        {% endfor %}
+
       </div>
+
+    {% else %}
+
+    {% endif %}
+      <h4><strong>Nenhum</strong> local encontrado</h4>
     </main>
 {% endblock content %}
